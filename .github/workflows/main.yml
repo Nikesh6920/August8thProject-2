@@ -32,7 +32,7 @@ jobs:
         
     - name: Build with Maven
       run: |
-           mvn --batch-mode --update-snapshots package
+           cd ${{env.FolderName}} && mvn --batch-mode --update-snapshots package
            cd ${{env.FolderName}}/target && ls
            
 #    - name: Veracode Upload And Scan
