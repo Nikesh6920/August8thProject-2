@@ -2,6 +2,8 @@ name: Simple Test Workflow
 on: [push]
   #[pull_request]:
 env: 
+  Repo: Nikesh6920/webapp
+  Path: webapp
   FolderName: webapp
 
 jobs:
@@ -13,8 +15,8 @@ jobs:
     - name: Git Checkout
       uses: actions/checkout@v3
       with:
-        repository: Nikesh6920/webapp
-        path: webapp
+        repository: ${{env.Repo}}
+        path: ${{env.Path}}
 
     - name: Files Check
       run: |
