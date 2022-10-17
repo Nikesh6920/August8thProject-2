@@ -2,6 +2,7 @@ name: Simple Test Workflow
 on: [push]
   #[pull_request]:
 
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,11 +11,11 @@ jobs:
     - name: Git Checkout
       uses: actions/checkout@v3
       with:
-        repository: Nikesh6920/webapp
-        path: webapp
+        repository: ${specs.repo}
+        path: ${specs.path}
 
     - name: Files Check
-      run: cd webapp && ls
+      run: cd ${specs.folderName} && ls
     
     - name: Set up JDK 11
       uses: actions/setup-java@v3
@@ -25,8 +26,8 @@ jobs:
         
     - name: Build with Maven
       run: |
-           mvn -B package --file webapp/pom.xml
-           cd webapp/target && ls
+           mvn -B package --file ${specs.folderName}/pom.xml
+           cd ${specs.folderName}/target && ls
            
 #    - name: Veracode Upload And Scan
 #      uses: veracode/veracode-uploadandscan-action@0.2.1
