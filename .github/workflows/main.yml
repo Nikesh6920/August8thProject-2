@@ -2,8 +2,6 @@ name: Simple Test Workflow
 on: [push]
   #[pull_request]:
 env:
-  Owner: Nikesh6920
-  Repo: webapp
   Path: webapp
   FolderName: webapp
   
@@ -16,11 +14,12 @@ jobs:
     - name: Git Checkout
       uses: actions/checkout@v3
       with:
-        repository: env.Owner/env.Repo
-        path: env.Path
+        repository: Nikesh6920/webapp
+        path: $Path
 
     - name: Files Check
-      run: cd env.FolderName && ls
+      run: cd $FolderName && ls
+           echo "$FolderName is the folder name."
     
     - name: Set up JDK 11
       uses: actions/setup-java@v3
@@ -31,8 +30,8 @@ jobs:
         
     - name: Build with Maven
       run: |
-           mvn -B package --file env.FolderName/pom.xml
-           cd env.FolderName/target && ls
+           mvn -B package --file $FolderName/pom.xml
+           cd $FolderName/target && ls
            
 #    - name: Veracode Upload And Scan
 #      uses: veracode/veracode-uploadandscan-action@0.2.1
