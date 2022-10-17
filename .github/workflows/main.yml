@@ -2,7 +2,8 @@ name: Simple Test Workflow
 on: [push]
   #[pull_request]:
 env:
-  repo: Nikesh6920/webapp
+  owner: Nikesh6920
+  repo: webapp
   path: webapp
   folderName: webapp
   
@@ -15,7 +16,7 @@ jobs:
     - name: Git Checkout
       uses: actions/checkout@v3
       with:
-        repository: $repo
+        repository: $owner/$repo
         path: $path
 
     - name: Files Check
