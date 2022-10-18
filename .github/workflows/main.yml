@@ -1,6 +1,8 @@
 name: Simple Test Workflow
-on: [push]
-  #[pull_request]:
+on: 
+  [push]:
+  [pull_request]:
+
 env: 
   Repo: Nikesh6920/webapp
   Path: webapp
@@ -50,4 +52,3 @@ jobs:
 #        exclude: '*.js'
 #        include: '*.war'
 #        criticality: 'VeryHigh'
-#mvn -B package --file ${{env.FolderName}}/pom.xml
