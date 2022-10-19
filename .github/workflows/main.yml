@@ -22,8 +22,8 @@ jobs:
       run: |
            cd ${{env.FolderName}} && ls
            echo "${{env.FolderName}} is the folder name."
-           echo "${{Author}}"
-           if (${{Author}} == "NIKESHV"){println("True")}
+           echo "${{env.Author}}"
+           if (${{env.Author}} == "NIKESHV"){println("True")}
            else{println("False")}
            
     - name: Set up JDK 11
