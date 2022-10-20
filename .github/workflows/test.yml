@@ -1,9 +1,6 @@
 name: Simple Test Workflow
 
-on: 
-  [pull_request]:
-  workflow_dispatch:
-#[push]
+on: workflow_dispatch
 
 env: 
   Repo: Nikesh6920/webapp
@@ -13,7 +10,7 @@ env:
 jobs:
 
   Checkout:
-    runs-on: self-hosted
+    runs-on: [self-hosted, Linux, X64]
     steps:
     - name: Git Checkout
       uses: actions/checkout@v3
