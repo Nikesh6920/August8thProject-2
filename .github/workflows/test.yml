@@ -24,7 +24,7 @@ jobs:
 
   Setup:
     needs: Checkout
-    runs-on: self-hosted
+    runs-on: [self-hosted, Linux, X64]
     steps:
     - name: Set up JDK 11
       uses: actions/setup-java@v3
@@ -39,20 +39,20 @@ jobs:
 
   Build:
     needs: [Checkout, Setup]
-    runs-on: self-hosted
+    runs-on: [self-hosted, Linux, X64]
     steps:
     - name: Build with Maven
       run: |
            cd ${{env.FolderName}} && mvn --batch-mode --update-snapshots package
            cd target && ls
 
-  Cleanup:
-    needs: [Checkout, Setup, Build]
-    runs-on: self-hosted
-    steps:
-    - name: Post Maven Cleanup
-      run: |
-            sudo yum remove maven -y
+#  Cleanup:
+#    needs: [Checkout, Setup, Build]
+#    runs-on: [self-hosted, Linux, X64]
+#    steps:
+#    - name: Post Maven Cleanup
+#      run: |
+#            sudo yum remove maven -y
            
 #    - name: Veracode Upload And Scan
 #      uses: veracode/veracode-uploadandscan-action@0.2.1
