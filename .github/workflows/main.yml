@@ -39,9 +39,9 @@ jobs:
            cd ${{env.FolderName}} && mvn --batch-mode --update-snapshots package
            cd target && ls
            
-#    - name: Post Maven Cleanup
-#      run: |
-#            sudo yum remove maven -y
+    - name: Post Maven Cleanup
+      run: |
+            sudo yum remove maven -y
            
 #    - name: Veracode Upload And Scan
 #      uses: veracode/veracode-uploadandscan-action@0.2.1
