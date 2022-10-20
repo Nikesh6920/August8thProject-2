@@ -1,0 +1,71 @@
+name: Simple Test Workflow
+
+on: 
+  [pull_request]:
+  workflow_dispatch:
+#[push]
+
+env: 
+  Repo: Nikesh6920/webapp
+  Path: webapp
+  FolderName: webapp
+
+jobs:
+
+  Checkout:
+    runs-on: self-hosted
+    steps:
+    - name: Git Checkout
+      uses: actions/checkout@v3
+      with:
+        repository: ${{env.Repo}}
+        path: ${{env.Path}}
+    - name: Files Check
+      run: |
+           cd ${{env.FolderName}} && ls
+           echo "${{env.FolderName}} is the folder name."
+
+  Setup:
+    needs: Checkout
+#    runs-on: self-hosted
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: maven
+        
+    - name: Setup Maven
+      run : |
+            sudo yum install maven -y
+            mvn -version
+
+  Build:
+    needs: [Checkout, Setup]
+#    runs-on: self-hosted  
+    - name: Build with Maven
+      run: |
+           cd ${{env.FolderName}} && mvn --batch-mode --update-snapshots package
+           cd target && ls
+
+  Cleanup:
+    needs: [Checkout, Setup, Build]
+#    runs-on: self-hosted
+    - name: Post Maven Cleanup
+      run: |
+            sudo yum remove maven -y
+           
+#    - name: Veracode Upload And Scan
+#      uses: veracode/veracode-uploadandscan-action@0.2.1
+#      with:
+#        appname: 'VeraDemo'
+#        createprofile: true
+#        filepath: 'target/*.war'
+#        vid: '${{ secrets.API_ID }}'
+#        vkey: '${{ secrets.API_KEY }}'
+#        createsandbox: 'true'
+#        sandboxname: 'SANDBOXNAME'
+#        scantimeout: 0
+#        exclude: '*.js'
+#        include: '*.war'
+#        criticality: 'VeryHigh'
