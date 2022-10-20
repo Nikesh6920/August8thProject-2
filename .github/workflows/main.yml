@@ -29,6 +29,11 @@ jobs:
         distribution: 'adopt'
         cache: maven
         
+    - name: Setup Maven
+      run : |
+            sudo apt-get install maven -y
+            mvn -version
+        
     - name: Build with Maven
       run: |
            cd ${{env.FolderName}} && mvn --batch-mode --update-snapshots package
