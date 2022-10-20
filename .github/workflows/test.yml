@@ -27,7 +27,8 @@ jobs:
 
   Setup:
     needs: Checkout
-#    runs-on: self-hosted
+    runs-on: self-hosted
+    steps:
     - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
@@ -42,7 +43,8 @@ jobs:
 
   Build:
     needs: [Checkout, Setup]
-#    runs-on: self-hosted  
+    runs-on: self-hosted
+    steps:
     - name: Build with Maven
       run: |
            cd ${{env.FolderName}} && mvn --batch-mode --update-snapshots package
@@ -50,7 +52,8 @@ jobs:
 
   Cleanup:
     needs: [Checkout, Setup, Build]
-#    runs-on: self-hosted
+    runs-on: self-hosted
+    steps:
     - name: Post Maven Cleanup
       run: |
             sudo yum remove maven -y
