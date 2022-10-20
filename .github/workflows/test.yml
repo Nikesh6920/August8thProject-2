@@ -1,4 +1,4 @@
-name: Simple Test Workflow
+name: Test Workflow [Multiple Jobs]
 
 on: workflow_dispatch
 
