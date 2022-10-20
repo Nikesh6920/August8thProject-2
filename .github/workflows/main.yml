@@ -31,7 +31,7 @@ jobs:
         
     - name: Setup Maven
       run : |
-            sudo apt-get install maven -y
+            sudo yum install maven -y
             mvn -version
         
     - name: Build with Maven
